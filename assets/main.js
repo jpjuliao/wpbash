@@ -1,7 +1,7 @@
 (function() {
 
     window.onload = (event) => {
-        var pageURL = "/wp-admin/tools.php?page=wpbash";
+        var pageURL = "/wp-admin/admin-ajax.php";
         var username = "";
         var hostname = "";
         var currentDir = "";
