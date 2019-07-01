@@ -17,7 +17,7 @@
         var usernameElement = document.getElementById("wpbash_username");
         var uploadFormElement = document.getElementById("wpbash_upload");
         var fileBrowserElement = document.getElementById("wpbash_filebrowser");
-        getShellInfo();
+        window.getShellInfo();
         
         window.getShellInfo = () => {
             var request = new XMLHttpRequest();
