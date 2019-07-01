@@ -9,15 +9,16 @@
     var defaultDir = "";
     var commandHistory = [];
     var currentCommand = 0;
-    var formElement = document.getElementById("wpbash_form");
-    var inputTextElement = document.getElementById('wpbash_inputtext');
-    var inputElement = document.getElementById("wpbash_input");
-    var outputElement = document.getElementById("wpbash_output");
-    var usernameElement = document.getElementById("wpbash_username");
-    var uploadFormElement = document.getElementById("wpbash_upload");
-    var fileBrowserElement = document.getElementById("wpbash_filebrowser");
 
     window.onload = (event) => {
+        
+        var formElement = document.getElementById("wpbash_form");
+        var inputTextElement = document.getElementById('wpbash_inputtext');
+        var inputElement = document.getElementById("wpbash_input");
+        var outputElement = document.getElementById("wpbash_output");
+        var usernameElement = document.getElementById("wpbash_username");
+        var uploadFormElement = document.getElementById("wpbash_upload");
+        var fileBrowserElement = document.getElementById("wpbash_filebrowser");
 
         getShellInfo();
         
@@ -26,7 +27,7 @@
         formElement.addEventListener("submit", function(event){
             event.preventDefault()
         });
-        
+
     }
         
     window.getShellInfo = () => {
