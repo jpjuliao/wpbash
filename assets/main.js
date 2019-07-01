@@ -117,7 +117,7 @@
         
         document.onkeydown = checkForArrowKeys;
 
-        window.checkForArrowKeys = (e =>) {
+        window.checkForArrowKeys = (e) => {
             e = e || window.event;
 
             if (e.keyCode == '38') {
