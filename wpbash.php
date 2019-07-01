@@ -10,7 +10,7 @@
  
 Namespace Jpjuliao\WPBash;
 
-if (! defined(ABSPATH)) {
+if (!defined('ABSPATH')) {
     exit;
 }
 
