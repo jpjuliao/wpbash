@@ -48,7 +48,7 @@ class WPBash
             'wpbash',
             array($this, 'view')
         );
-        $this->page_url = menu_page_url('wpbash');
+        $this->page_url = menu_page_url('wpbash', $echo = false);
     }
 
     /**
