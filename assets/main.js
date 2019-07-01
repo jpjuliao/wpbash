@@ -26,12 +26,12 @@
         usernameElement = document.getElementById("wpbash_username");
         uploadFormElement = document.getElementById("wpbash_upload");
         fileBrowserElement = document.getElementById("wpbash_filebrowser");
+
+        getShellInfo();
     
         formElement.addEventListener("submit", function(event){
             event.preventDefault()
         });
-
-        getShellInfo();
 
         document.onkeydown = checkForArrowKeys;
 
