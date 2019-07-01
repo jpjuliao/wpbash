@@ -27,6 +27,7 @@ class WPBash
     {
         add_action('wp_ajax_wpbash', [$this, 'controller']);
         add_action('admin_menu', [$this, 'register_page']);
+        add_action('admin_enqueue_scripts', [$this, 'enqueue_scripts']);
     }
 
     /**
@@ -168,7 +169,7 @@ class WPBash
         <div class="console">
             <div class="output" id="wpbash_output"></div>
             <div class="input" id="wpbash_input">
-                <form id="form" method="GET" onSubmit="sendCommand()">
+                <form id="wpbash_form" method="GET" onSubmit="sendCommand()">
                     <div class="username" id="wpbash_username"></div>
                     <input class="inputtext" id="wpbash_inputtext" type="text" name="cmd" autocomplete="off" autofocus>
                 </form>
@@ -178,5 +179,13 @@ class WPBash
             <input type="file" name="file" id="wpbash_filebrowser" onchange='uploadFile()' />
         </form>
      <?php
+    }
+
+    /**
+     * Register scripts
+     * @return void
+     */
+    public function enqueue_scripts() {
+        wp_enqueue_script( 'wpbash-main-js', plugins_url( 'assets/main.js', __FILE__ ) );
     }
 }
