@@ -188,7 +188,7 @@ class WPBash
     public function enqueue_scripts() {
         $screen = get_current_screen();
         if ($screen->id == 'tools_page_wpbash') {
-            wp_enqueue_script( 'wpbash-main-js', plugins_url( 'assets/main.js', __FILE__ ) );
+            wp_enqueue_script( 'wpbash-main-js', plugins_url( 'assets/main.js', __FILE__ ), '1.0', true );
         }
     }
 }

