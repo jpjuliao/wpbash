@@ -187,6 +187,7 @@ class WPBash
      */
     public function enqueue_scripts() {
         $screen = get_current_screen();
+        var_dump($screen);
         if ($screen->id == 'wpbash') {
             wp_enqueue_script( 'wpbash-main-js', plugins_url( 'assets/main.js', __FILE__ ) );
         }

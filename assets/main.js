@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
 
     window.onload = (event) => {
         var pageURL = "/wp-admin/admin-ajax.php";
