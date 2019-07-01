@@ -99,7 +99,7 @@ class WPBash
         
             .console {
                 width: 100%;
-                height: 100%;
+                height: 500px;
                 margin: auto;
                 position: absolute;
                 color: #fff;
@@ -186,6 +186,9 @@ class WPBash
      * @return void
      */
     public function enqueue_scripts() {
-        wp_enqueue_script( 'wpbash-main-js', plugins_url( 'assets/main.js', __FILE__ ) );
+        $screen = get_current_screen();
+        if ($screen->id == 'wpbash') {
+            wp_enqueue_script( 'wpbash-main-js', plugins_url( 'assets/main.js', __FILE__ ) );
+        }
     }
 }

